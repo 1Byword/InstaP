@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Brute Force Tool</title>
+    <!-- استخدام مكتبات متخصصة في الواجهة -->
+</head>
+<body>
+    <h1>Instagram Brute Force Tool</h1>
+    <form id="bruteForm" method="post" enctype="multipart/form-data">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="passwordFile">Password File:</label>
+        <input type="file" id="passwordFile" name="passwordFile" required accept=".txt"><br>
+
+        <!-- تأكيد قبل البدء -->
+        <label for="confirmStart">Confirm Start:</label>
+        <input type="checkbox" id="confirmStart" required><br>
+
+        <button type="button" id="startButton">Start Brute Force</button>
+    </form>
+    <div id="progress">
+        Progress: 0%
+    </div>
+
+    <div id="result">
+        <!-- Password found result will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', function () {
+           // التحقق من تأكيد البدء
+            const confirmStart = document.getElementById('confirmStart');
+            if (!confirmStart.checked) {
+                alert('Please confirm the start before proceeding.');
+                return;
+            }
+
+            const progressBar = document.getElementById('progress');
+            progressBar.textContent = 'Progress: 0%';
+
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('passwordFile');
+            const formData = new FormData(document.getElementById('bruteForm'));
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'bruteforce.php', true);
+
+            xhr.upload.addEventListener('progress', function (event) {
+                const percentComplete = (event.loaded / event.total) * 100;
+                progressBar.textContent = `Progress: ${percentComplete.toFixed(2)}%`;
+            });
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const result = document.getElementById('result');
+                        const responseText = xhr.responseText;
+                        result.textContent = responseText;
+
+                        if (responseText.includes('Password found')) {
+                            alert('Password found and saved.');
+                        }
+                    } else {
+                        alert('An error occurred while running the program.');
+                    }
+                }
+            };
+
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>
