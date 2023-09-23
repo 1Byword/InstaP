@@ -2,14 +2,11 @@
 Instagram Brute Force Tool
 
 Running the Program:
-   Downloading the Project:
-Start by downloading this project from the GitHub repository to your computer.
 
 Make sure you have PHP installed on your computer.
  You can install PHP from the official PHP website (https://www.php.net/) or use packages like XAMPP or WAMP if you are using Windows.
 
-Running the Program:
-After installing PHP, you can run the program by navigating to the project folder and executing the following command in your command prompt or terminal:
+After installing PHP you can run the program by navigating to the project folder and executing the following command in your command prompt or terminal:
 
 php -S 0.0.0.0:8080
 
