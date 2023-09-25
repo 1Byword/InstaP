@@ -88,8 +88,7 @@ if ($request->isMethod('POST')) {
 
 function checkPassword($username, $password) {
     // قم بإجراء الاختبار هنا واعمل على تحسين أدائه
-    // يمكنك استخدام تقنيات تخمين أكثر ذكاءً هنا
-    // لمجرد الاختبار، سأستخدم تحقق بسيط من اسم المستخدم وكلمة المرور
+ 
     if ($username === 'testuser' && $password === 'testpass') {
         return true;
     }
